@@ -1,0 +1,21 @@
+{
+  "name": "vigenere-cipher",
+  "version": "1.0.0",
+  "description": "password-based encryption",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Vigenere",
+    "Encryption",
+    "Password",
+    "Cipher"
+  ],
+  "author": "Harry Kodua",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "prettier": "2.5.1"
+  }
+}
