@@ -4,7 +4,10 @@
   "description": "password-based encryption",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "npx prettier --ignore-unknown --write .",
+    "check": "npx prettier --check .",
+    "test": "jest",
+    "prepare": "husky install"
   },
   "keywords": [
     "Vigenere",
@@ -15,7 +18,13 @@
   "author": "Harry Kodua",
   "license": "MIT",
   "devDependencies": {
+    "husky": "^7.0.4",
+    "jest": "^27.4.7",
+    "lint-staged": "^12.2.2",
     "nodemon": "^2.0.15",
     "prettier": "2.5.1"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
