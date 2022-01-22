@@ -1,18 +1,18 @@
 /**
  * @description Password-based encryption using Vigenère cipher
  * @param {{
- *   type: 'alphanumeric' | 'numbers' | 'lowercase' | 'uppercase' | 'symbols' | 'ascii' | 'base64' | 'custom',
- *   strict: boolean,
- *   characters: string,
- *   secret: string,
+ *   type?: 'alphanumeric' | 'numbers' | 'lowercase' | 'uppercase' | 'symbols' | 'ascii' | 'base64' | 'custom',
+ *   strict?: boolean,
+ *   characters?: string,
+ *   secret?: string,
  * }} options
  * @constructor
  */
-function Vigenere(options = {}) {
+module.exports = function Vigenere(options = {}) {
   const secret = { value: null };
   const characterTypes = {
     numbers: "0123456789",
-    custom: options.characters,
+    custom: "CUSTOM_TYPE", // will be replaced by the custom type below
     lowercase: "abcdefghijklmnopqrstuvwxyz",
     uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     symbols: `!@#$%^&*()_+-=[]{}|;':",./<>?`,
@@ -26,7 +26,7 @@ function Vigenere(options = {}) {
   if (!options.type) options.type = "base64";
   if (!characterTypes[options.type]) {
     throw new TypeError(
-      "Invalid character type. Available options are: " +
+      "Invalid type provided. Available options are: " +
         Object.keys(characterTypes).join(", ") +
         ";"
     );
@@ -38,9 +38,10 @@ function Vigenere(options = {}) {
         "Characters must be specified when using custom character type."
       );
     }
-    if (!options.characters.length) {
+    if (typeof options.characters !== "string") {
       throw new TypeError("Custom characters must be a non-empty string.");
     }
+    options.characters = String(options.characters);
   }
   if (options.secret) secret.value = options.secret;
 
@@ -48,6 +49,8 @@ function Vigenere(options = {}) {
     if (!secret) throw new TypeError("Secret must be specified.");
     if (!secret.length)
       throw new TypeError("Secret must be a non-empty string.");
+    if (typeof secret.value !== "string")
+      throw new TypeError("Secret key characters must be string type.");
 
     secret.split("").every((character) => {
       if (characterTypes[options.type].indexOf(character) === -1) {
@@ -138,4 +141,4 @@ function Vigenere(options = {}) {
 
   this.encode = encode;
   this.decode = decode;
-}
+};

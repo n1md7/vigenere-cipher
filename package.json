@@ -6,7 +6,9 @@
   "scripts": {
     "format": "npx prettier --ignore-unknown --write .",
     "check": "npx prettier --check .",
+    "test:ci": "jest --ci",
     "test": "jest",
+    "test:watch": "jest --watch",
     "prepare": "husky install"
   },
   "keywords": [
